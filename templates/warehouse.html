@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Warehouse</title>
+	<style type="text/css">
+		.boxbackground{
+			background:url('../static/warehouse.jpeg') no-repeat;
+            height:500px;
+            position:relative;
+		}
+
+		.orders{
+			position:relative;
+			top:400px;
+			left:80px;
+			font-size:20px;
+		}
+		.deliever{
+			position:relative; 
+			top:400px; 
+			left:80px;
+			width:70px;
+			height:55px;
+			font-size:30px;
+		}
+
+		.goods{
+			position:relative;
+			top:400px;
+			left:80px;
+			font-size:20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="boxbackground">
+	<form action="/warehouse" method="post">
+	<select id="orders" class= "orders" name="orders">
+		<option>-Orders-</option>>
+		<option>{{ order_id.0 }}</option>>
+		<option>{{ order_id.1 }}</option>>
+	</select>
+	<select id="goods" class="goods" name="goods">
+		<option>-Goods-</option>>
+		<option>iphone</option>>
+        <option>kindle</option>>
+        <option>Nike</option>>
+		<option>LA hat</option>>
+	</select>
+	<input id="deliever" type= "submit" class="deliever" value="Deliever"/>
+    </form>
+    </div>
+</body>
+</html>

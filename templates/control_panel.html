@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>control panel</title>
+    <script type="text/javascript">
+        window.onload = function showorders() {
+            var new_order_id ={{ order_id|tojson }};
+            var new_all_data ={{ all_data|tojson }};
+            var tbody = document.getElementById('orders');
+            for (var i = 0; i < new_order_id.length; i++) {
+                var trow = getDataRow(new_all_data["control_panel"][new_order_id[i]], new_order_id[i]);
+                tbody.appendChild(trow);
+            }
+        }
+        function getDataRow(h, m) {
+            var row = document.createElement('tr');
+            var order_id_Cell = document.createElement('td');
+            order_id_Cell.innerHTML = m;
+            row.appendChild(order_id_Cell);
+
+            var warehouse_id_cell = document.createElement('td');
+            warehouse_id_cell.innerHTML = h.warehouse_id;
+            row.appendChild(warehouse_id_cell);
+
+            var car_id_cell = document.createElement('td');
+            car_id_cell.innerHTML = h.car_id;
+            row.appendChild(car_id_cell);
+
+            if (h.box_id){
+                var box_id_cell = document.createElement('td');
+                box_id_cell.innerHTML = h.box_id;
+                row.appendChild(box_id_cell);
+            }
+            else{
+                var box_id_cell = document.createElement('td');
+                box_id_cell.innerHTML = "";
+                row.appendChild(box_id_cell);
+            }
+
+            var order_date_cell = document.createElement('td');
+            var mystr = h.date.order_date['day']+"/"+h.date.order_date['month']+"/"+h.date.order_date['year'];
+            order_date_cell.innerHTML = mystr;
+            row.appendChild(order_date_cell);
+
+            if (h.date.start_date){
+                var start_date_cell = document.createElement('td');
+                start_date_cell.innerHTML = h.date.start_date['day']+"/"+h.date.start_date['month']+"/"+h.date.start_date['year'];
+                row.appendChild(start_date_cell);
+            }
+            else{
+                var start_date_cell = document.createElement('td');
+                start_date_cell.innerHTML = "";
+                row.appendChild(start_date_cell);
+            }
+
+            if (h.date.arrive_date){
+                var arrive_date_cell = document.createElement('td');
+                arrive_date_cell.innerHTML = h.date.arrive_date['day']+"/"+h.date.arrive_date['month']+"/"+h.date.arrive_date['year'];
+                row.appendChild(arrive_date_cell);
+            }
+            else{
+                var arrive_date_cell = document.createElement('td');
+                arrive_date_cell.innerHTML ="";
+                row.appendChild(arrive_date_cell);
+            }
+
+            if (h.date.pickup_date) {
+                var pickup_date_cell = document.createElement('td');
+                pickup_date_cell.innerHTML = h.date.arrive_date['day']+"/"+h.date.arrive_date['month']+"/"+h.date.arrive_date['year'];
+                row.appendChild(pickup_date_cell);
+            }
+            else{
+                var pickup_date_cell = document.createElement('td');
+                pickup_date_cell.innerHTML ="";
+                row.appendChild(pickup_date_cell);
+            }
+            var delCell = document.createElement('td');
+	        row.appendChild(delCell);
+	        var btnDel = document.createElement('input');
+	        btnDel.setAttribute('type','button');
+	        btnDel.setAttribute('value','Delete');
+	        btnDel.onclick=function() {
+                if (confirm("Sure for delete?")) {
+                    this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+                }
+            }
+	        delCell.appendChild(btnDel);
+            return row;
+        }
+    </script>
+</head>
+<body>
+    <form action="/" method="post">
+    <h1>iMazon Console</h1>
+    <select id="users" name="users">
+		<option>-Users-</option>>
+		<option>{{ user_id.0 }}</option>>
+		<option>{{ user_id.1 }}</option>>
+	</select>
+	<select id="goods" name="goods">
+		<option>-Goods-</option>>
+		<option>{{ goods_id.0 }}</option>>
+		<option>{{ goods_id.1 }}</option>>
+	</select>
+	<select id="cars" name="cars">
+		<option>-Cars-</option>>
+		<option>{{ cars_id.0 }}</option>>
+		<option>{{ cars_id.1 }}</option>>
+	</select>
+	<select id="warehouses" name="warehouses">
+		<option>-Warehouses-</option>>
+		<option>{{ warehouse_id.0 }}</option>>
+		<option>{{ warehouse_id.1 }}</option>>
+	</select>
+	<input class="submit-button" type="submit" value="Submit"/>
+    </form>
+	<br>
+
+    <form action='/' method='get'>
+    <input type="submit" value="Refresh Orders" onclick="document.location.reload()"/>
+    <table border="1">
+		<caption>Order List</caption>
+		<thead>
+        <tr>
+            <th>Order_ID</th>
+			<th>Warehouse_ID</th>
+			<th>Car_ID</th>
+			<th>Box_ID</th>
+			<th>Order_date</th>
+			<th>Start_date</th>
+			<th>Arrive_date</th>
+			<th>Pickup_date</th>
+            <th>Operation</th>
+        </tr>
+		</thead>
+        <tbody id="orders"></tbody>
+    </table>
+    </form>
+
+</body>
+</html>

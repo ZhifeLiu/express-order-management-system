@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>box</title>
+	<style type="text/css">
+		.boxbackground{
+			background:url('../static/box.jpg') no-repeat;
+            height:500px;
+            position:relative;
+		}
+		.password-input{
+			width:200px;
+			height:50px;
+			position:relative;
+			top:200px;
+			left:250px;
+			font-size:30px;
+		}
+		.comfirm{
+			position:relative; 
+			top:200px; 
+			left:260px;
+			width:70px;
+			height:50px;
+			font-size:60px;
+		}
+		.label{
+			position:relative;
+			top:200px;
+			left:250px;
+			font-size:30px;
+		}
+	</style>
+</head>
+<body>
+	<div class="boxbackground">
+        <form action="/box" method="post">
+            <label id="label" class="label">Password:</label>
+            <input id="password" type="text" class="password-input" name="password" value="{{password}}"/>
+            <input id="comfirm" class="comfirm" type="submit" value="Comfirm"/>
+            {% for i in get_flashed_messages() %}
+                {{ i }}
+            {% endfor %}
+        </form>
+
+    </div>
+</body>
+</html>

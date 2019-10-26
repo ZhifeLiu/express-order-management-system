@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Warehouse</title>
+	<style type="text/css">
+		.boxbackground{
+			background:url('../static/car.jpg') no-repeat;
+            height:500px;
+            position:relative;
+		}
+		.order{
+
+			position:relative;
+			top:180px;
+			left:100px;
+			font-size:20px;
+		}
+		.arrive{
+			position:relative; 
+			top:200px; 
+			left:260px;
+			width:70px;
+			height:35px;
+			font-size:15px;
+		}
+		.box{
+			position:relative;
+			top:190px;
+			left:100px;
+			font-size:25px;
+		}
+	</style>
+</head>
+<body>
+	<div class="boxbackground">
+	<form action="/transportation" method="post">
+	<select id="order" class="order" name="order">
+		<option>-Orders-</option>>
+		<option>{{ order_id.0 }}</option>>
+		<option>{{ order_id.1 }}</option>>
+	</select>
+       <br></br>
+	<select id="box" class="box" name="box">
+		<option>-Boxs-</option>>
+		<option>{{ box_id.0 }}</option>>
+		<option>{{ box_id.1 }}</option>>
+	</select>
+        <br></br>
+	<button id="arrive" type= "submit" class="arrive">Arrive</button>
+    </form>
+    </div>
+</body>
+</html>
